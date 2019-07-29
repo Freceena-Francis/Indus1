@@ -51,7 +51,7 @@ echo '<div class="progress-bar progress-bar-success" data-transitiongoal="'.$per
 }
 if($_POST['code'])
 {
-	$id12=$_POST['code'];
+	$id12=$_POST['id'];
 $sql22="SELECT * FROM project WHERE direct_intcode='$id12'";
 $result22=$conn->query($sql22);
 while($row22=$result22->fetch_assoc())
