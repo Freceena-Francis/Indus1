@@ -1,4 +1,23 @@
+<?php
+include('db.php');
+if(isset($_POST['add'])){
+	$name=$_POST['name'];
+$desig=$_POST['desig'];	
+$alpsid=$_POST['alpsid'];
+$mail=$_POST['email'];
 
+$new = [
+    'options' => ['cost' => 11],
+    'algo' => PASSWORD_DEFAULT,
+    'hash' => null
+];
+$pass=$_POST['pass'];
+$newHash = password_hash($pass, $new['algo'], $new['options']);
+       
+$sql="INSERT INTO user(name,alpsid,role,password,mail) VALUES ('$name','$alpsid','$desig','$newHash','$mail')";
+$result=$conn->query($sql);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -87,17 +106,24 @@
                   </div>
                   <div class="x_content">
                     <br>
-                    <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+                    <form id="demo-form2" method="POST" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                         <div class="row">
                       <div class="form-group">
                        
                           <label class="control-label col-md-3"> Name</label>
                           <div class="col-md-3 ">
-                          <input type="text" name="named" value="" id=""class="form-control">
+                          <input type="text" name="name" value="" id="name" class="form-control">
                         </div>
                          <label class="control-label col-md-2"> Designation</label>
                           <div class="col-md-3 ">
-                          <input type="text" name="desig" value="" id=""class="form-control">
+                          <select id="desig"  name="desig" class="form-control"  >
+						  <option  value="" selected="selected" >Choose</option> 
+                            <option value="0" >Indus User</option>
+                            <option value="1" >User</option>
+                            <option value="2">Admin</option> 
+                            
+                            
+                          </select>
                         </div>
                   </div>
                     </div> 
@@ -106,35 +132,36 @@
                        
                           <label class="control-label col-md-3">Alps Id</label>
                           <div class="col-md-3 ">
-                          <input type="text" name="alpsid" value="" id=""class="form-control">
+                          <input type="text" name="alpsid" value="" id="alpsid" class="form-control">
                         </div>
-                         <label class="control-label col-md-2"> Team</label>
+                         <label class="control-label col-md-2">Password</label>
                           <div class="col-md-3 ">
-                          <input type="text" name="team" value="" id=""class="form-control">
+                          <input type="text" name="pass" value="" id="pass" class="form-control">
                         </div>
                   </div>
-                  <div class="row">
+                  
                   <div class="form-group">
                        
                           <label class="control-label col-md-3">Email</label>
                           <div class="col-md-3 ">
-                          <input type="Email" name="alpsid" value="" id=""class="form-control">
+                          <input type="Email" name="email" value="" id="email" class="form-control">
                         </div>
                         
-                  </div>
+                  
                   </div>
                     </div> 
                     <div class="ln_solid"></div>
                     <div class="pull-right">
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#adduser">Add</button>
+						<button type="submit"  name="add" placeholder="" class="btn btn-success">Add</button>
+                          
                         </div>
                       </div>
                       </div>
 
                     <!--Add model start-->
-<div class="modal fade bs-example-modal-sm" id="adduser" tabindex="-1" role="dialog" aria-hidden="true">
+<!--<div class="modal fade bs-example-modal-sm" id="adduser" tabindex="-1" role="dialog" aria-hidden="true">
                                         <div class="modal-dialog modal-sm">
                                         <div class="modal-content">
 
@@ -152,7 +179,7 @@
                                         </div>
                                         </div>
                                         </div>
-                                        </div>
+                                        </div>-->
                     <!--- Add model ends--->
 
                     </form>
