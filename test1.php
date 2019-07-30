@@ -5,6 +5,7 @@ if($_POST['direct'])
 $id=$_POST['id'];
 $sql="SELECT * FROM project WHERE direct_type='$id'";
 $result=$conn->query($sql);
+echo '<option >Choose Option</option>'; 
 while($row=$result->fetch_assoc())
 {
 $id=$row['direct_intcode'];
@@ -16,6 +17,7 @@ if($_POST['indirect'])
 {
 $sql1="SELECT * FROM type WHERE type_cat='Indirect'";
 $result1=$conn->query($sql1);
+echo '<option >Choose Option</option>'; 
 while($row1=$result1->fetch_assoc())
 {
 $id=$row1['type_intcode'];
@@ -28,6 +30,7 @@ if($_POST['id'])
 	$id1=$_POST['id'];
 $sql2="SELECT * FROM subtask WHERE task_codeint='$id1'";
 $result2=$conn->query($sql2);
+echo '<option >Choose Option</option>'; 
 while($row2=$result2->fetch_assoc())
 {
 $id=$row2['subtask_intcode'];
@@ -62,6 +65,21 @@ echo '<label>'.$data.'</label>
 
 }
 }
+
+if($_POST['indirect_code'])
+{
+	$id13=$_POST['id'];
+$sql23="SELECT * FROM type WHERE type_intcode='$id13'";
+$result23=$conn->query($sql23);
+while($row23=$result23->fetch_assoc())
+{
+$data=$row23['indr_usrcode'];
+echo '<label>'.$data.'</label>
+       <input type="hidden" name="code_hidden" value="'.$data.'">';
+
+}
+}
+
 
 
 ?>

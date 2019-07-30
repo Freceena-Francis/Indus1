@@ -422,6 +422,27 @@ $("#project").change(function()
 var id=$(this).val();
 var dataString = 'id='+ id;
 console.log(id);
+var res = id.substring(0, 3);
+console.log(res);
+if (res=="IND")
+{
+	$.ajax
+({
+type: "POST",
+url: "test1.php",
+data:{id: id, 
+      indirect_code :1,
+	  },
+cache: false,
+success: function(html)
+{
+$("#code").html(html);
+
+} 
+});
+}
+else
+{
 $.ajax
 ({
 type: "POST",
@@ -435,6 +456,7 @@ success: function(html)
 $("#code").html(html);
 } 
 });
+}
 
 
 });
